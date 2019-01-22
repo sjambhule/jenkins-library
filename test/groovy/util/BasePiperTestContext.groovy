@@ -30,6 +30,7 @@ class BasePiperTestContext {
     @Bean
     Utils mockUtils() {
         def mockUtils = new Utils()
+        mockUtils.env = [:]
         mockUtils.steps = [
             stash  : {  },
             unstash: {  }
