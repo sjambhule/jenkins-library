@@ -35,9 +35,18 @@ class commonPipelineEnvironment implements Serializable {
     //influxCustomDataTags represents tags in Influx. Tags are required in Influx for easier querying data
     private Map influxCustomDataTags = [:]
 
+    private Map genericPropertiesMap = [:]
+
+    def setCustomProperty(property, value) {
+        genericPropertiesMap[property] = value
+    }
+
+    def getCustomProperty(property) {
+        return genericPropertiesMap.get(property)
+    }
+
     String mtarFilePath
 
-    String transportRequestId
     String changeDocumentId
 
     def reset() {
@@ -60,9 +69,10 @@ class commonPipelineEnvironment implements Serializable {
         influxCustomDataMap = [pipeline_data: [:], step_data: [:]]
         influxCustomDataMapTags = [pipeline_data: [:]]
 
+        genericPropertiesMap = [:]
+
         mtarFilePath = null
 
-        transportRequestId = null
         changeDocumentId = null
     }
 
