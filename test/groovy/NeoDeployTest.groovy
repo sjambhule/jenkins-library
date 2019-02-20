@@ -242,7 +242,7 @@ class NeoDeployTest extends BasePiperTest {
 
     @Test
     void archivePathFromCPETest() {
-        nullScript.commonPipelineEnvironment.setMtarFilePath('archive.mtar')
+        nullScript.commonPipelineEnvironment.setCustomProperty('mtarFilePath', 'archive.mtar')
         stepRule.step.neoDeploy(script: nullScript)
 
         Assert.assertThat(shellRule.shell,
@@ -252,7 +252,7 @@ class NeoDeployTest extends BasePiperTest {
 
     @Test
     void archivePathFromParamsHasHigherPrecedenceThanCPETest() {
-        nullScript.commonPipelineEnvironment.setMtarFilePath('archive2.mtar')
+        nullScript.commonPipelineEnvironment.setCustomProperty('mtarFilePath', 'archive2.mtar')
         stepRule.step.neoDeploy(script: nullScript,
             source: "archive.mtar")
 

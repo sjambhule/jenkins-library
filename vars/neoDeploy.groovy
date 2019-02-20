@@ -58,7 +58,7 @@ void call(parameters = [:]) {
             .mixin(stepCompatibilityConfiguration)
             .mixinStepConfig(script.commonPipelineEnvironment, STEP_CONFIG_KEYS, CONFIG_KEY_COMPATIBILITY)
             .mixinStageConfig(script.commonPipelineEnvironment, parameters.stageName ?: env.STAGE_NAME, STEP_CONFIG_KEYS, CONFIG_KEY_COMPATIBILITY)
-            .addIfEmpty('source', script.commonPipelineEnvironment.getMtarFilePath())
+            .addIfEmpty('source', script.commonPipelineEnvironment.getCustomProperty('mtarFilePath'))
             .mixin(parameters, PARAMETER_KEYS, CONFIG_KEY_COMPATIBILITY)
             .withMandatoryProperty('neo')
             .withMandatoryProperty('source')

@@ -277,7 +277,7 @@ public class TransportRequestUploadFileTest extends BasePiperTest {
     public void uploadFileToTransportRequestFilePathFromParameters() {
 
         // this one is not used when file path is provided via signature
-        nullScript.commonPipelineEnvironment.setMtarFilePath('/path2')
+        nullScript.commonPipelineEnvironment.setCustomProperty('mtarFilePath', '/path2')
 
         ChangeManagement cm = new ChangeManagement(nullScript) {
             void uploadFileToTransportRequest(BackendType type,
@@ -307,7 +307,7 @@ public class TransportRequestUploadFileTest extends BasePiperTest {
     public void uploadFileToTransportRequestFilePathFromCommonPipelineEnvironment() {
 
         // this one is used since there is nothing in the signature
-        nullScript.commonPipelineEnvironment.setMtarFilePath('/path2')
+        nullScript.commonPipelineEnvironment.setCustomProperty('mtarFilePath', '/path2')
 
         ChangeManagement cm = new ChangeManagement(nullScript) {
             void uploadFileToTransportRequest(BackendType type,

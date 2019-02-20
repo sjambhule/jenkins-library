@@ -239,58 +239,6 @@ none
 def myInfluxDataMap = commonPipelineEnvironment.getInfluxCustomDataMap()
 ```
 
-### getMtarFileName()
-
-#### Description
-
-Returns the path of the mtar archive file.
-
-#### Parameters
-
-none
-
-#### Return value
-
-The path of the mtar archive file.
-
-#### Side effects
-
-none
-
-#### Exceptions
-
-none
-
-#### Example
-
-```groovy
-commonPipelineEnvironment.getMtarFileName()
-```
-
-### setMtarFileName(name)
-
-#### Description
-
-Sets the path of the mtar archive file. Any old value is discarded.
-
-#### Parameters
-
-* `mtarFilePath` - The path of the mtar archive file name.
-
-#### Side effects
-
-none
-
-#### Exceptions
-
-none
-
-#### Example
-
-```groovy
-commonPipelineEnvironment.setMtarFileName('path/to/foo.mtar')
-```
-
 ### getPipelineMeasurement(measurementName)
 
 #### Description

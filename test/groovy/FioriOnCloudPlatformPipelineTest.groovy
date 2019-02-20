@@ -133,7 +133,7 @@ class FioriOnCloudPlatformPipelineTest extends BasePiperTest {
 
         //
         // the deployable is exchanged between the involved steps via this property:
-        assertThat(nullScript.commonPipelineEnvironment.getMtarFilePath(), is(equalTo('test.mtar')))
+        assertThat(nullScript.commonPipelineEnvironment.getCustomProperty('mtarFilePath').toString(), is(equalTo('test.mtar')))
 
         //
         // the neo deploy call:

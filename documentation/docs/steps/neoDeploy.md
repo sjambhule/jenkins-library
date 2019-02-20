@@ -84,7 +84,7 @@ The parameter `neo` is a map which contains the following parameters:
 * `script` - The common script environment of the Jenkinsfile run. Typically `this` is passed to this parameter. This allows the function to access the [`commonPipelineEnvironment`](commonPipelineEnvironment.md) for retrieving e.g. configuration parameters.
 * `deployMode` - The deployment mode which should be used. Available options are `'mta'` (default), `'warParams'` (deploying WAR file and passing all the deployment parameters via the function call) and `'warPropertiesFile'` (deploying WAR file and putting all the deployment parameters in a .properties file)
 * `neoHome` - The path to the `neo-java-web-sdk` tool used for SAP CP deployment. If no parameter is provided, the path is retrieved from the environment variables using the environment variable `NEO_HOME`. If no parameter and no environment variable is provided, the path is retrieved from the step configuration using the step configuration key `neoHome`. If the previous configurations are not provided, the tool is expected on the `PATH`, and if it is not available on the `PATH` an AbortException is thrown.
-* `source`- The path to the archive for deployment to SAP CP. If not provided `mtarFilePath` from commom pipeline environment is used instead.
+* `source`- The path to the archive for deployment to SAP CP. If not provided `commonPipelineEnvironment.getCustomProperty('mtarFilePath')` is used instead.
 * `warAction` - Action mode when using WAR file mode. Available options are `deploy` (default) and `rolling-update` which performs update of an application without downtime in one go.
 
 The parameters for `neo`:

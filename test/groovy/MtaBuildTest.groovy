@@ -78,7 +78,7 @@ public class MtaBuildTest extends BasePiperTest {
         stepRule.step.mtaBuild(script: nullScript,
                       buildTarget: 'NEO')
 
-        def mtarFilePath = nullScript.commonPipelineEnvironment.getMtarFilePath()
+        def mtarFilePath = nullScript.commonPipelineEnvironment.getCustomProperty('mtarFilePath')
 
         assert mtarFilePath == "com.mycompany.northwind.mtar"
     }
