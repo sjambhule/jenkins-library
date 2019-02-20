@@ -129,7 +129,7 @@ public class TransportRequestCreateTest extends BasePiperTest {
 
         stepRule.step.transportRequestCreate(script: nullScript, changeDocumentId: '001', developmentSystemId: '001', cmUtils: cm)
 
-        assert nullScript.commonPipelineEnvironment.getTransportRequestId() == '001'
+        assert nullScript.commonPipelineEnvironment.getCustomProperty('transportRequestId') == '001'
         assert result == [changeId: '001',
                          developmentSystemId: '001',
                          cmEndpoint: 'https://example.org/cm',
@@ -173,7 +173,7 @@ public class TransportRequestCreateTest extends BasePiperTest {
                         changeManagement: [type: 'CTS'],
                         cmUtils: cm)
 
-        assert nullScript.commonPipelineEnvironment.getTransportRequestId() == '001'
+        assert nullScript.commonPipelineEnvironment.getCustomProperty('transportRequestId') == '001'
         assert result == [transportType: 'W',
                          targetSystemId: 'XYZ',
                          description: 'desc',
