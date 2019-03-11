@@ -244,6 +244,12 @@ private List getContainerEnvs(config, imageName) {
     def dockerEnvVars = config.containerEnvVars?.get(imageName) ?: config.dockerEnvVars ?: [:]
     def dockerWorkspace = config.containerWorkspaces?.get(imageName) != null ? config.containerWorkspaces?.get(imageName) : config.dockerWorkspace ?: ''
 
+    // Inherit the proxy information from the master to the container
+    SystemEnv systemEnv = new SystemEnv()
+    for (String env : systemEnv.getEnv().keySet()) {
+        containerEnv << envVar(key: env, value: systemEnv.get(env))
+    }
+    
     if (dockerEnvVars) {
         for (String k : dockerEnvVars.keySet()) {
             containerEnv << envVar(key: k, value: dockerEnvVars[k].toString())
@@ -253,13 +259,6 @@ private List getContainerEnvs(config, imageName) {
     if (dockerWorkspace) {
         containerEnv << envVar(key: "HOME", value: dockerWorkspace)
     }
-
-    // Inherit the proxy information from the master to the container
-    SystemEnv systemEnv = new SystemEnv()
-    for (String env : systemEnv.getEnv().keySet()) {
-        containerEnv << envVar(key: env, value: systemEnv.get(env))
-    }
-
     // ContainerEnv array can't be empty. Using a stub to avoid failure.
     if (!containerEnv) {
         containerEnv << envVar(key: "EMPTY_VAR", value: " ")
