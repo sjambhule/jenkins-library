@@ -245,10 +245,7 @@ private List getContainerEnvs(config, imageName) {
     def dockerWorkspace = config.containerWorkspaces?.get(imageName) != null ? config.containerWorkspaces?.get(imageName) : config.dockerWorkspace ?: ''
 
     // Inherit the proxy information from the master to the container
-    SystemEnv systemEnv = new SystemEnv()
-    for (String env : systemEnv.getEnv().keySet()) {
-        containerEnv << envVar(key: env, value: systemEnv.get(env))
-    }
+  
     
     if (dockerEnvVars) {
         for (String k : dockerEnvVars.keySet()) {
