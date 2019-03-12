@@ -21,6 +21,15 @@ def getMandatoryParameter(Map map, paramName, defaultValue = null) {
 
 }
 
+def runClosures(Map closures) {
+
+    def closuresToRun = closures.values().asList()
+    Collections.shuffle(closuresToRun) // Shuffle the list so no one tries to rely on the order of execution
+    for (int i = 0; i < closuresToRun.size(); i++) {
+        (closuresToRun[i] as Closure).run()
+    }
+}
+
 def stash(name, include = '**/*.*', exclude = '') {
     echo "Stash content: ${name} (include: ${include}, exclude: ${exclude})"
     steps.stash name: name, includes: include, excludes: exclude
@@ -106,3 +115,4 @@ static String fillTemplate(String templateText, Map binding){
     String result = engine.createTemplate(templateText).make(binding)
     return result
 }
+
