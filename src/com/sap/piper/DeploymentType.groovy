@@ -15,21 +15,17 @@ enum DeploymentType {
         return value
     }
 
-    static DeploymentType selectFor(CloudPlatform cloudPlatform, boolean isProduction) {
+    static DeploymentType selectFor(CloudPlatform cloudPlatform, boolean enableZeroDowntimeDeployment) {
 
         switch (cloudPlatform) {
 
             case CloudPlatform.NEO:
-                if (!isProduction) {
-                    return NEO_DEPLOY
-                }
-                return NEO_ROLLING_UPDATE
+                if (enableZeroDowntimeDeployment) return NEO_ROLLING_UPDATE
+                return NEO_DEPLOY
 
             case CloudPlatform.CLOUD_FOUNDRY:
-                if (!isProduction) {
-                    return CF_STANDARD
-                }
-                return CF_BLUE_GREEN
+                if (enableZeroDowntimeDeployment) return CF_BLUE_GREEN
+                return CF_STANDARD
 
             default:
                 throw new RuntimeException("Unknown cloud platform: ${cloudPlatform}")

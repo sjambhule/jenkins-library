@@ -162,7 +162,7 @@ class DeployTest extends BasePiperTest {
         ]
 
         thrown.expect(Exception)
-        thrown.expectMessage('Test Deployment skipped because no targets defined!')
+        thrown.expectMessage('Deployment skipped because no targets defined!')
 
         stepRule.step.deploy(
             script: nullScript
@@ -216,7 +216,7 @@ class DeployTest extends BasePiperTest {
                 ]
             ],
             source: 'file.mtar',
-            enableZeroDowntimeDeployment: true 
+            enableZeroDowntimeDeployment: true
         )
 
         Assert.assertThat(shellRule.shell,
@@ -246,20 +246,19 @@ class DeployTest extends BasePiperTest {
             cfTargets: [
                 [
                     appName:'paramTestAppName',
-                    manifest: 'paramTest.yml',
+                    manifest: 'test.yml',
                     org: 'paramTestOrg',
                     space: 'paramTestSpace',
                     credentialsId: 'paramCfCredentialsId'
                 ]
-            ],
-            enableZeroDowntimeDeployment: false
+            ]
         ])
 
         assertThat(dockerExecuteRule.dockerParams, hasEntry('dockerImage', 's4sdk/docker-cf-cli'))
         assertThat(dockerExecuteRule.dockerParams, hasEntry('dockerWorkspace', '/home/piper'))
 
         assertThat(shellRule.shell, hasItem(containsString('cf login -u "paramCfUser" -p \'paramCfPassword\' -a https://api.cf.eu10.hana.ondemand.com -o "paramTestOrg" -s "paramTestSpace"')))
-        assertThat(shellRule.shell, hasItem(containsString("cf push paramTestAppName -f 'paramTest.yml'")))
+        assertThat(shellRule.shell, hasItem(containsString("cf push paramTestAppName -f 'test.yml'")))
         assertThat(shellRule.shell, hasItem(containsString("cf logout")))
     }
 
@@ -282,9 +281,6 @@ class DeployTest extends BasePiperTest {
         assertThat(shellRule.shell, hasItem(containsString('cf login -u "cfUser1" -p \'cfPassword1\' -a https://api.cf.eu10.hana.ondemand.com -o "testOrg1" -s "testSpace1"')))
         assertThat(shellRule.shell, hasItem(containsString("cf blue-green-deploy testAppName1 -f 'test.yml'")))
         assertThat(shellRule.shell, hasItem(containsString("cf logout")))
-
-        assertThat(dockerExecuteRule.dockerParams, hasEntry('dockerImage', 's4sdk/docker-cf-cli'))
-        assertThat(dockerExecuteRule.dockerParams, hasEntry('dockerWorkspace', '/home/piper'))
 
         assertThat(shellRule.shell, hasItem(containsString('cf login -u "cfUser2" -p \'cfPassword2\' -a https://api.cf.eu10.hana.ondemand.com -o "testOrg2" -s "testSpace2"')))
         assertThat(shellRule.shell, hasItem(containsString("cf blue-green-deploy testAppName2 -f 'test.yml'")))
