@@ -64,21 +64,6 @@ class SetupCommonPipelineEnvironmentTest extends BasePiperTest {
         assertEquals('my-maven-docker', nullScript.commonPipelineEnvironment.configuration.steps.mavenExecute.dockerImage)
     }
 
-    @Test
-    void testIsPropertiesConfigurationAvailable() {
-
-        helper.registerAllowedMethod("fileExists", [String], { String path ->
-            return path.endsWith('.pipeline/config.properties')
-        })
-
-        stepRule.step.setupCommonPipelineEnvironment(script: nullScript, utils: getSWAMockedUtils())
-
-        assertEquals(Boolean.TRUE.toString(), swaOldConfigUsed)
-        assertEquals('.pipeline/config.properties', usedConfigFile)
-        assertNotNull(nullScript.commonPipelineEnvironment.configProperties)
-        assertEquals('value', nullScript.commonPipelineEnvironment.configProperties['key'])
-    }
-
     private getSWAMockedUtils() {
         new Utils() {
             void pushToSWA(Map payload, Map config) {
