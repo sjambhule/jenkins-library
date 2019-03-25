@@ -31,8 +31,6 @@ import util.Rules
 
 class NeoDeployTest extends BasePiperTest {
 
-    def toolJavaValidateCalled = false
-
     @ClassRule
     public static TemporaryFolder tmp = new TemporaryFolder()
 
