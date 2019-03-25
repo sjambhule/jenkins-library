@@ -64,7 +64,7 @@ void call(parameters = [:]) {
         if (config.cfTargets) {
 
             deploymentType = DeploymentType.selectFor(CloudPlatform.CLOUD_FOUNDRY, enableZeroDowntimeDeployment).toString()
-            deployTool = (script.commonPipelineEnvironment.configuration.isMta) ? 'mtaDeployPlugin' : 'cf_native'
+            deployTool = script.commonPipelineEnvironment.configuration.isMta ? 'mtaDeployPlugin' : 'cf_native'
 
             for (int i = 0; i < config.cfTargets.size(); i++) {
 
