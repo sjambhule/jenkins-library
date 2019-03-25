@@ -50,10 +50,10 @@ void call(parameters = [:]) {
 
         utils.pushToSWA([
             step: STEP_NAME,
-            stepParamKey1: 'cfTargets',
-            stepParam1: config.cfTargets,
-            stepParamKey2: 'neoTargets',
-            stepParam2: config.neoTargets
+            stepParamKey1: 'stage',
+            stepParam1: stageName,
+            stepParamKey2: 'enableZeroDowntimeDeployment',
+            stepParam2: enableZeroDowntimeDeployment
         ], config)
 
         def index = 1
